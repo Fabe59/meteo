@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Weather
+            </h1>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-offset-4 is-4">
+                <form method="GET" action="{% url 'weather:add' %}">
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input type="search" name="search" class="input" placeholder="City Name">
+                        </div>
+                        <div class="control">
+                            <button class="button is-primary" type="submit">
+                                Add City
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-offset-4 is-4">
+                {% for elt in weather_data %}
+                <div class="box">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image is-50x50">
+                                <img src="http://openweathermap.org/img/w/{{ elt.icon }}.png" alt="Image">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <span class="title">{{ elt.city }}</span>
+                                    <br>
+                                    <span class="subtitle">{{ elt.description }}</span>
+                                    <br>
+                                    <span class="subtitle">Mesurée : {{ elt.temperature }} °C</span>
+                                    <br>
+                                    <span class="subtitle">Ressentie : {{ elt.ressentie }} °C</span>
+                                </p>
+                            </div>
+                        </div>
+                        <form action="{% url 'weather:delete' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="city_id" id="city_id" value="{{ elt.id }}">
+                            <button type="submit" class="delete"></button>
+                        </form>
+                    </article>
+                </div>
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

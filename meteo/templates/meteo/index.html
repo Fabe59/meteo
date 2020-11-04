@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                What's the weather like ?
+            </h1>
+        </div>
+    </div>
+</section>
+<section>
+    <!-- {% if user.is_superuser %}
+        <button><a class="admin-button" href="admin/">Admin</a></button>
+    {% endif %}
+    <button><a class="index-button" href="{% url 'index' %}">Accueil</a></button> -->
+    <button><a class="weather-button" href="{% url 'weather:home' %}">Weather</a></button>
+</section>
+
+{% endblock content %}
