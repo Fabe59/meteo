@@ -27,8 +27,8 @@ def home(request):
 
 def add(request):
     req = request.GET['search'].title()
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&lang=fr&units=metric&appid=921a5306ab5df641be12e6a3bf4f209a'
-    city_weather = requests.get(url.format(req)).json()
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&lang=fr&units=metric&appid={}'
+    city_weather = requests.get(url.format(req, os.getenv('API_KEY'))).json()
     test = city_weather['cod']
     verify = City.objects.filter(name=req)
     
