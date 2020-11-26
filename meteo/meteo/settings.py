@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'weather',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+LOGIN_REDIRECT_URL = 'weather:home'
+LOGIN_URL = 'user:login'

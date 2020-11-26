@@ -16,10 +16,11 @@
     <div class="container">
         <div class="columns">
             <div class="column is-offset-4 is-4">
-                <form method="GET" action="{% url 'weather:add' %}">
+                <form method="POST" action="{% url 'weather:add' %}" id="add-form">
+                    {% csrf_token %}
                     <div class="field has-addons">
                         <div class="control is-expanded">
-                            <input type="search" name="search" class="input" placeholder="City Name">
+                            <input type="search" name="search" class="input" id="input-city" placeholder="City Name">
                         </div>
                         <div class="control">
                             <button class="button is-primary" type="submit">
@@ -34,7 +35,7 @@
 </section>
 <section class="section">
     <div class="container">
-        <div class="columns">
+        <div class="columns" id="ajax-column">
             <div class="column is-offset-4 is-4">
                 {% for elt in weather_data %}
                 <div class="box">

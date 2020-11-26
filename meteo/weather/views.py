@@ -3,6 +3,7 @@ from .models import City
 import os
 import requests
 import json
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     cities = City.objects.all() #return all the cities in the database
@@ -26,7 +27,7 @@ def home(request):
     return render(request, 'home.html', context) #returns the home.html template
 
 def add(request):
-    req = request.GET['search'].title()
+    req = request.POST.get('search').title()
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&lang=fr&units=metric&appid={}'
     city_weather = requests.get(url.format(req, os.getenv('API_KEY'))).json()
     test = city_weather['cod']
