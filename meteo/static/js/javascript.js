@@ -32,7 +32,7 @@ $('#add-form').submit(function(event){
     $.ajax({
         type: 'POST',
         headers: {
-           'X-CSRF-Token' : csrftoken,
+           'X-CSRFToken' : csrftoken,
         },
         url : "/weather/add/",
         data : {
