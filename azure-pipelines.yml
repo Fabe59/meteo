@@ -10,13 +10,11 @@ pool:
   vmImage: ubuntu-latest
 strategy:
   matrix:
-    Python35:
-      PYTHON_VERSION: '3.5'
-    Python36:
-      PYTHON_VERSION: '3.6'
     Python37:
       PYTHON_VERSION: '3.7'
-  maxParallel: 3
+    Python38:
+      PYTHON_VERSION: '3.8'
+  maxParallel: 2
 
 steps:
 - task: UsePythonVersion@0
@@ -42,6 +40,7 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip setuptools wheel
+    python -m pipenv lock -r > requirements.txt
     pip install -r requirements.txt
     pip install unittest-xml-reporting
   displayName: 'Install prerequisites'
